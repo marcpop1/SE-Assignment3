@@ -14,7 +14,7 @@ public class House : Building
         Area = area;
     }
 
-    public void Print()
+    public override void Print()
     {
         
     }

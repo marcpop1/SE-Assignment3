@@ -14,7 +14,7 @@ public class Hospital : Building
         Departments = departments;
     }
 
-    public void Print()
+    public override void Print()
     {
 
     }

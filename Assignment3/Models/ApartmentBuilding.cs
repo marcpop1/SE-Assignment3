@@ -14,7 +14,7 @@ public class ApartmentBuilding : Building
         NumberOfApartments = numberOfApartments;
     }
 
-    public void Print()
+    public override void Print()
     {
 
     }

@@ -14,7 +14,7 @@ public class School : Building
         NumberOfClasses = numberOfClasses;
     }
 
-    public void Print()
+    public override void Print()
     {
 
     }
