@@ -2,7 +2,9 @@ namespace Assignment3.Models;
 
 public abstract class Building
 {
-    public string Address { get; set; }
+    public string? Address { get; set; }
+
+    public Building() { }
 
     public Building(string address)
     {

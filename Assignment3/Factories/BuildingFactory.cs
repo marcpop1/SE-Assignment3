@@ -1,10 +1,10 @@
 using Assignment3.Models;
 
-namespace Assignment3;
+namespace Assignment3.Factories;
 
 public class BuildingFactory
 {
-    public Building Create(BuildingType buildingType, string address)
+    public Building Create(string buildingType, string address = "")
     {
         switch (buildingType) {
             case BuildingType.House:

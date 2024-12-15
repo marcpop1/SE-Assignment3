@@ -1,9 +1,9 @@
 namespace Assignment3;
 
-public enum BuildingType
+public static class BuildingType
 {
-    House = 0,
-    ApartmentBuilding = 1,
-    Hospital = 2,
-    School = 3
+    public const string House = "house";
+    public const string ApartmentBuilding = "apartament building";
+    public const string Hospital = "hospital";
+    public const string School = "school";
 }

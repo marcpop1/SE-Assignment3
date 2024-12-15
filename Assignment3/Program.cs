@@ -1,10 +1,41 @@
-﻿using Assignment3;
+﻿using Assignment3.Commands;
+using Assignment3.Factories;
 using Assignment3.Models;
-
-Console.WriteLine("Hello, World!");
 
 BuildingFactory factory = new BuildingFactory();
 
-Building house = factory.Create(BuildingType.House, "New Address");
+CreateBuildingListCommand createBuildingListCommand = new CreateBuildingListCommand(factory);
 
-Console.WriteLine(house.Address);
+IEnumerable<Building> buildings = new List<Building>();
+
+while (true)
+{
+    Console.WriteLine("Available commands:");
+    Console.WriteLine("create-list: Create a new building list.");
+
+    if (buildings.Count() != 0)
+    {
+        Console.WriteLine("show-list: Show the created building list in XML / JSON / CSV format.");
+        Console.WriteLine("show-filtered-list: Show the created building list in XML / JSON / CSV format filtered by building type.");
+    }
+
+    string? input = Console.ReadLine();
+
+    switch (input)
+    {
+        case "create-list":
+            buildings = createBuildingListCommand.Execute();
+            break;
+        case "show-list":
+            ChooseFormatCommand chooseFormatCommand = new ChooseFormatCommand();
+            ShowBuildingListCommand command = new ShowBuildingListCommand(buildings, chooseFormatCommand);
+            command.Execute();
+            break;
+        case "show-filtered-list":
+            ShowFilteredBuildingListCommand showFilteredBuildingListCommand = new ShowFilteredBuildingListCommand(buildings);
+            showFilteredBuildingListCommand.Execute();
+            break;
+        default:
+            break;
+    }
+}
