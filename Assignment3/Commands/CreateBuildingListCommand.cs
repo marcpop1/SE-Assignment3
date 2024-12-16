@@ -1,3 +1,4 @@
+using Assignment3.Constants;
 using Assignment3.Factories;
 using Assignment3.Models;
 
@@ -33,7 +34,10 @@ public class CreateBuildingListCommand : ICommand<IEnumerable<Building>>
                 case BuildingType.Hospital:
                 case BuildingType.School:
                     Building building = buildingFactory.Create(input);
+                    SetBuildingPropertiesCommand setBuildingPropertiesCommand = new SetBuildingPropertiesCommand(building);
+                    setBuildingPropertiesCommand.Execute();
                     buildings.Add(building);
+                    Console.WriteLine("Building added. Enter the next one or \".\" to finish creating the list.");
                     break;
                 case ".":
                     isListDone = true;

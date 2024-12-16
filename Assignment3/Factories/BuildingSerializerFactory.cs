@@ -1,3 +1,4 @@
+using Assignment3.Constants;
 using Assignment3.Serializers;
 
 namespace Assignment3.Factories;
@@ -8,7 +9,8 @@ public class BuildingSerializerFactory
     {
         IBuildingSerializer serializer;
 
-        switch (format) {
+        switch (format)
+        {
             case PrintFormat.Xml:
                 serializer = new XmlBuildingSerializer();
                 break;

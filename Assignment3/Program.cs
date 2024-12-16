@@ -2,10 +2,6 @@
 using Assignment3.Factories;
 using Assignment3.Models;
 
-BuildingFactory factory = new BuildingFactory();
-
-CreateBuildingListCommand createBuildingListCommand = new CreateBuildingListCommand(factory);
-
 IEnumerable<Building> buildings = new List<Building>();
 
 while (true)
@@ -24,15 +20,20 @@ while (true)
     switch (input)
     {
         case "create-list":
+            BuildingFactory factory = new BuildingFactory();
+            CreateBuildingListCommand createBuildingListCommand = new CreateBuildingListCommand(factory);
             buildings = createBuildingListCommand.Execute();
             break;
         case "show-list":
             ChooseFormatCommand chooseFormatCommand = new ChooseFormatCommand();
-            ShowBuildingListCommand command = new ShowBuildingListCommand(buildings, chooseFormatCommand);
-            command.Execute();
+            ShowBuildingListCommand showBuildingListCommand = new ShowBuildingListCommand(buildings, chooseFormatCommand);
+            showBuildingListCommand.Execute();
             break;
         case "show-filtered-list":
-            ShowFilteredBuildingListCommand showFilteredBuildingListCommand = new ShowFilteredBuildingListCommand(buildings);
+            ChooseBuildingTypeCommand chooseBuildingTypeCommand = new ChooseBuildingTypeCommand();
+            ChooseFormatCommand chooseFormatCommandForFiltered = new ChooseFormatCommand();
+            ShowBuildingListCommand showBuildingListCommandForFiltered = new ShowBuildingListCommand(buildings, chooseFormatCommandForFiltered);
+            ShowFilteredBuildingListCommand showFilteredBuildingListCommand = new ShowFilteredBuildingListCommand(buildings, chooseBuildingTypeCommand, showBuildingListCommandForFiltered);
             showFilteredBuildingListCommand.Execute();
             break;
         default:

@@ -1,20 +1,22 @@
+using Assignment3.Constants;
 using Assignment3.Models;
 
 namespace Assignment3.Factories;
 
 public class BuildingFactory
 {
-    public Building Create(string buildingType, string address = "")
+    public Building Create(string buildingType)
     {
-        switch (buildingType) {
+        switch (buildingType)
+        {
             case BuildingType.House:
-                return new House(address);
+                return new House();
             case BuildingType.ApartmentBuilding:
-                return new ApartmentBuilding(address);
+                return new ApartmentBuilding();
             case BuildingType.Hospital:
-                return new Hospital(address);
+                return new Hospital();
             default:
-                return new School(address);
+                return new School();
         }
     }
 }

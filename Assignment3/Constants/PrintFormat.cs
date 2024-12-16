@@ -1,4 +1,4 @@
-namespace Assignment3;
+namespace Assignment3.Constants;
 
 public static class PrintFormat
 {

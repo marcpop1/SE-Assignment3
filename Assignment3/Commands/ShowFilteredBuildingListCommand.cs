@@ -6,15 +6,20 @@ public class ShowFilteredBuildingListCommand : ICommand<string>
 {
     private readonly IEnumerable<Building> buildings;
 
-    public ShowFilteredBuildingListCommand(IEnumerable<Building> buildings)
+    private readonly ICommand<Type> chooseBuildingTypeCommand;
+
+    private readonly ICommand<string> showBuildingListCommand;
+
+    public ShowFilteredBuildingListCommand(IEnumerable<Building> buildings, ICommand<Type> chooseBuildingTypeCommand,
+        ICommand<string> showBuildingListCommand)
     {
         this.buildings = buildings;
+        this.chooseBuildingTypeCommand = chooseBuildingTypeCommand;
+        this.showBuildingListCommand = showBuildingListCommand;
     }
 
     public string Execute()
     {
-        ICommand<Type> chooseBuildingTypeCommand = new ChooseBuildingTypeCommand();
-
         Type buildingType = chooseBuildingTypeCommand.Execute();
 
         List<Building> filteredBuildings = new List<Building>();
@@ -27,7 +32,12 @@ public class ShowFilteredBuildingListCommand : ICommand<string>
             }
         }
 
-        ICommand<string> showBuildingListCommand = new ShowBuildingListCommand(filteredBuildings, new ChooseFormatCommand());
+        if (filteredBuildings.Count() == 0)
+        {
+            Console.WriteLine("There are no such buildings in the list.");
+
+            return string.Empty;
+        }
 
         string serializedBuildings = showBuildingListCommand.Execute();
 
