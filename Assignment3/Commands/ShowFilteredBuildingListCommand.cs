@@ -8,14 +8,10 @@ public class ShowFilteredBuildingListCommand : ICommand<string>
 
     private readonly ICommand<Type> chooseBuildingTypeCommand;
 
-    private readonly ICommand<string> showBuildingListCommand;
-
-    public ShowFilteredBuildingListCommand(IEnumerable<Building> buildings, ICommand<Type> chooseBuildingTypeCommand,
-        ICommand<string> showBuildingListCommand)
+    public ShowFilteredBuildingListCommand(IEnumerable<Building> buildings, ICommand<Type> chooseBuildingTypeCommand)
     {
         this.buildings = buildings;
         this.chooseBuildingTypeCommand = chooseBuildingTypeCommand;
-        this.showBuildingListCommand = showBuildingListCommand;
     }
 
     public string Execute()
@@ -39,6 +35,7 @@ public class ShowFilteredBuildingListCommand : ICommand<string>
             return string.Empty;
         }
 
+        ICommand<string> showBuildingListCommand = new ShowBuildingListCommand(filteredBuildings, new ChooseFormatCommand());
         string serializedBuildings = showBuildingListCommand.Execute();
 
         return serializedBuildings;

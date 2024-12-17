@@ -31,9 +31,7 @@ while (true)
             break;
         case "show-filtered-list":
             ChooseBuildingTypeCommand chooseBuildingTypeCommand = new ChooseBuildingTypeCommand();
-            ChooseFormatCommand chooseFormatCommandForFiltered = new ChooseFormatCommand();
-            ShowBuildingListCommand showBuildingListCommandForFiltered = new ShowBuildingListCommand(buildings, chooseFormatCommandForFiltered);
-            ShowFilteredBuildingListCommand showFilteredBuildingListCommand = new ShowFilteredBuildingListCommand(buildings, chooseBuildingTypeCommand, showBuildingListCommandForFiltered);
+            ShowFilteredBuildingListCommand showFilteredBuildingListCommand = new ShowFilteredBuildingListCommand(buildings, chooseBuildingTypeCommand);
             showFilteredBuildingListCommand.Execute();
             break;
         default:
